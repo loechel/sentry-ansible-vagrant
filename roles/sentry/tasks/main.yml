@@ -1,5 +1,36 @@
 - include_vars: "{{ ansible_os_family }}.yml"
 
+- name: install python-related packages debian/ubuntu
+  apt: pkg={{ item }} state=latest
+  with_items:
+    - libxslt-dev
+    - libxml2-dev
+    - libz-dev
+    - libffi-dev
+    - libssl-dev
+    - python-dev
+    - python2.7-dev
+    - python-lxml
+    - python2.7-lxml
+  when: ansible_os_family == "Debian"
+
+- name: build python-related dependencies debian/ubuntu
+  apt: pkg={{ item }} state=build-dep
+  with_items:
+    - python-cffi
+  when: ansible_os_family == "Debian"
+
+- name: upgrade all debian/ubuntu packages
+  apt: upgrade=full
+  when: ansible_os_family == "Debian"
+
+- name: install python-related packages redhat/centos
+  yum: pkg={{ item }} state=latest
+  with_items:
+    - libxslt-devel
+    - libxml2-devel
+  when: ansible_os_family == "RedHat"
+
 - name: ensure sentry directory exists
   file:
     path: /var/sentry/

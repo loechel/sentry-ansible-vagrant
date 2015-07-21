@@ -19,6 +19,7 @@ DATABASES = {
 }
 
 SENTRY_KEY = '{{ sentry.secret_key }}'
+SENTRY_CACHE = 'sentry.cache.redis.RedisCache'
 
 # Set this to false to require authentication
 SENTRY_PUBLIC = False

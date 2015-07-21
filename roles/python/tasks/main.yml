@@ -4,6 +4,7 @@
     - python
     - python-dev
     - python-setuptools
+    - python-pip
   when: ansible_os_family == "Debian"
 
 - name: install python-related packages redhat/centos
@@ -12,10 +13,11 @@
     - python
     - python-devel
     - python-setuptools
+    - python-pip
   when: ansible_os_family == "RedHat"
 
 - name: install pip
-  easy_install: name=pip
+  easy_install: name=pip state=latest
 
 - name: install virtualenv
-  pip: name=virtualenv
+  pip: name=virtualenv state=latest
